@@ -17,13 +17,11 @@ class Product(models.Model):
     title = models.CharField(max_length=127, null=True, blank=True)
     description = models.TextField(max_length=2047, null=True, blank=True)
     price = models.IntegerField(null=True)
-    # image = 
     quantity = models.IntegerField(null=True)
     instock = models.BooleanField(null=True)
     rating = models.DecimalField(max_digits=2, decimal_places=1, null=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField('Tag', blank=True)
-
     size = models.CharField(max_length=1, choices=SIZES, null=True)
 
     created = models.DateTimeField(auto_now=True, null=True)
@@ -47,16 +45,16 @@ class Tag(models.Model):
     title = models.CharField(max_length=127, null=True, blank=True)
 
 class Cart(models.Model):
-    products = [7,8]
+    products = models.ManyToManyField('OrderedProduct')
     user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+
+
 
 class OrderedProduct(models.Model):
     product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(null=True)
     size = models.CharField(max_length=1, choices=Product.SIZES)
-    
 
-    
 
 
 
