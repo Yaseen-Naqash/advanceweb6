@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+
+
+    {% if username == 'sara' %}
+        <h1>if works</h1>
+
+    {% elif username == 'somehing' %}
+
+    {% else %}
+
+    {% endif %}
+
+    <ul>
+        
+    {% for x in courses %}
+
+
+        <li>{{ x.title }} : {{ x.score }}</li>
+    
+
+    
+
+    {% endfor %}
+
+    </ul>
+
+
+
+
+    <h1>{{ username }}</h1>
+    <p>age : {{ age }}</p>
+    {{ courses }}
+
+
+    
+    
+</body>
+</html>

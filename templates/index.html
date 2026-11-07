@@ -96,19 +96,24 @@
           <h2>New Products</h2>
 
           <div class="products">
-            {% for c in MyList %}
+            {% for p in products %}
             <!-- Product 1 -->
             <div class="product">
               <div class="product_card">
                 <img src="{% static 'assets/product1.png' %}" alt="Product-1" />
                 <div class="card_body">
                   <div class="body_part">
-                    <p class="title">{{c}}</p>
-                    <p class="price">45$</p>
+                    <p class="title">{{ p.title }}</p>
+                    <p class="price" {% if not p.discount > 0 %} style="text-decoration: none;" {% endif %} >{{ p.price }}$</p>
                   </div>
+                  
+
+                  
                   <div class="body_part">
                     <p class="description">Size 40</p>
-                    <p class="discount">40$</p>
+                    {% if p.discount > 0 %}
+                    <p class="discount">{{ p.final_price }}$</p>
+                    {% endif %}
                   </div>
                   <div class="product_btn">
                     <a href="pages/single.html" class="product_button">View</a>

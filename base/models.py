@@ -23,10 +23,20 @@ class Product(models.Model):
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField('Tag', blank=True)
     size = models.CharField(max_length=1, choices=SIZES, null=True)
-
+    discount = models.IntegerField(null=True, default=0, verbose_name='تخفیف')
+    
     created = models.DateTimeField(auto_now=True, null=True)
     updated = models.DateTimeField(auto_now_add=True, null=True)
     Expire = models.DateField(null=True)
+
+    @property
+    def final_price(self):
+        if self.discount > 0:
+            return self.price - (self.price / 100 * self.discount)
+        else:
+            return self.price
+
+
 
     def __str__(self):
         return self.title + " " + str(self.price)
