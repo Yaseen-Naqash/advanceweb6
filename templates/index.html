@@ -100,7 +100,11 @@
             <!-- Product 1 -->
             <div class="product">
               <div class="product_card">
-                <img src="{% static 'assets/product1.png' %}" alt="Product-1" />
+                {% if p.image %}
+                <img src="{{ p.image.url }}" alt="Product-1" />
+                {% else %}
+                <img src="{% static 'assets/noImage.png' %}" alt="{{ p.title }}" />
+                {% endif %}
                 <div class="card_body">
                   <div class="body_part">
                     <p class="title">{{ p.title }}</p>

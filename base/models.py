@@ -24,7 +24,8 @@ class Product(models.Model):
     tags = models.ManyToManyField('Tag', blank=True)
     size = models.CharField(max_length=1, choices=SIZES, null=True)
     discount = models.IntegerField(null=True, default=0, verbose_name='تخفیف')
-    
+    image = models.ImageField(upload_to='ProductImages', null=True)
+    # file = models.FileField(upload_to='files')
     created = models.DateTimeField(auto_now=True, null=True)
     updated = models.DateTimeField(auto_now_add=True, null=True)
     Expire = models.DateField(null=True)
