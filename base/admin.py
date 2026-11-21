@@ -5,11 +5,15 @@ from .models import Product, Category, Tag, OrderedProduct, Cart, User
 admin.site.register(Category)
 admin.site.register(Tag)
 admin.site.register(OrderedProduct)
-admin.site.register(Cart)
 admin.site.register(User)
 
-class ProductAdmin(admin.ModelAdmin):
+class OrderedProductInline(admin.TabularInline):
+    model = OrderedProduct
+    extra = 0
+    pass
 
+
+class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description']
     list_filter = ['size', 'category', 'instock']
     list_display = ['title', 'price', 'category']
@@ -33,9 +37,16 @@ class ProductAdmin(admin.ModelAdmin):
 
     )
 
-    
+
+
+
 admin.site.register(Product, ProductAdmin)
 
 admin.site.site_header = 'پنل مدیریت املاک'
 admin.site.site_title = 'مدیریت املاک'
 admin.site.index_title = 'به پنل مدیریت خوش آمدید'
+
+class CartAdmin(admin.ModelAdmin):
+    inlines = [OrderedProductInline]
+    pass
+admin.site.register(Cart, CartAdmin)

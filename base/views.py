@@ -39,3 +39,14 @@ def profile(request):
         'empty_list': [],
     }
     return render(request, 'profile.html', context)
+
+
+def detail(request, pk):
+    print(pk)
+    x = Product.objects.get(id=pk)
+    print(x)
+
+    context = {
+        'test': x
+    }
+    return render(request, 'detail.html', context)

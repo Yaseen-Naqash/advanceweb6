@@ -56,15 +56,20 @@ class Tag(models.Model):
     title = models.CharField(max_length=127, null=True, blank=True)
 
 class Cart(models.Model):
-    products = models.ManyToManyField('OrderedProduct')
+    # products = models.ManyToManyField('OrderedProduct')
     user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
 
 
 
 class OrderedProduct(models.Model):
+    cart = models.ForeignKey('Cart', on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(null=True)
     size = models.CharField(max_length=1, choices=Product.SIZES)
+
+    def __str__(self):
+        return self.product.title
+
 
 
 
