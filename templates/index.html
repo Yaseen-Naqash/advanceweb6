@@ -97,7 +97,7 @@
           <input type="text" placeholder="search">
 
           <div class="products">
-            {% for p in products %} {% asdasd %}
+            {% for p in products %}
             <!-- Product 1 -->
             <div class="product">
               <div class="product_card">
@@ -121,7 +121,7 @@
                     {% endif %}
                   </div>
                   <div class="product_btn">
-                    <a href="pages/single.html" class="product_button">View</a>
+                    <a href="{% url 'detail_url' p.id %}" class="product_button">View</a>
                   </div>
                 </div>
               </div>

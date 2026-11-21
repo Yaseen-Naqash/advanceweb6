@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
     path('panel/', profile),
-    path('detail/<int:pk>/', detail),
+    path('detail/<int:pk>/', detail, name='detail_url'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

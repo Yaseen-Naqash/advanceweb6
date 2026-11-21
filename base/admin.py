@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
     # exclude = ['quantity']
     fieldsets = (
         ('اطلاعات محصول',{
-            'fields': ['title', 'description']
+            'fields': ['title', 'description', 'discount']
         }),
         ('اطلاعات انبار داری',{
             'fields':['quantity', 'instock', 'price'],

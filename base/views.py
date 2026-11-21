@@ -42,11 +42,8 @@ def profile(request):
 
 
 def detail(request, pk):
-    print(pk)
-    x = Product.objects.get(id=pk)
-    print(x)
-
+    product = Product.objects.get(id=pk)
     context = {
-        'test': x
+        'product': product
     }
     return render(request, 'detail.html', context)
