@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, Category
 # Create your views here.
 
 def home(request):
@@ -52,9 +52,17 @@ def detail(request, pk):
 
 def products(request):
 
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    category_query = request.GET.get('category')
+    print(category_query)
+    # request.POST.get('q')
+ 
 
-    products = Product.objects.all()
+    products = Product.objects.filter(title__contains = q)
+
+    categories = Category.objects.all()
     context = {
-        'products': products
+        'products': products,
+        'categories' : categories
     }
     return render(request, 'search_filter.html', context)
