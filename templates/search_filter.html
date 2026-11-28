@@ -439,13 +439,15 @@
       <div class="toolbar">
         <!-- Search form (GET method, JS disabled – handled by Django later) -->
         <form
+        style="height: fit-content;"
           action=""
           method="GET"
-          style="display: flex; justify-content: space-between; width: 100%"
+          style="display: flex; justify-content: space-between; width: 100%; flex-direction: column;"
         >
-          <div class="search-form">
+          <div class="search-form" >
             <i class="fas fa-search"></i>
             <input
+                
               type="search"
               name="q"
               placeholder="جستجوی ..."
