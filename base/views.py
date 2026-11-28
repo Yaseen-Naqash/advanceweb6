@@ -47,3 +47,14 @@ def detail(request, pk):
         'product': product
     }
     return render(request, 'detail.html', context)
+
+
+
+def products(request):
+
+
+    products = Product.objects.all()
+    context = {
+        'products': products
+    }
+    return render(request, 'search_filter.html', context)

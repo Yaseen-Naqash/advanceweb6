@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه کلید بازی | گیم‌کی</title>
+    <!-- Font Awesome for icons (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset & base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #1e2b3c;
+            line-height: 1.6;
+            padding: 1.5rem 1rem;
+            min-height: 100vh;
+        }
+
+        /* Farsi font via CDN (Vazirmatn) */
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+
+        /* Main container */
+        .shop-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header / title */
+        .shop-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .shop-header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0b1a2b;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .shop-header h1 i {
+            color: #e63946;
+            font-size: 2rem;
+        }
+
+        .shop-header p {
+            color: #5b6f82;
+            font-size: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Search + filter bar */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            background: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 20, 30, 0.05);
+            border: 1px solid #e9edf2;
+        }
+
+        /* Search form */
+        .search-form {
+            flex: 1 1 260px;
+            display: flex;
+            align-items: center;
+            background: #f0f3f8;
+            border-radius: 40px;
+            padding: 0.2rem 0.2rem 0.2rem 1rem;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .search-form:focus-within {
+            background: #ffffff;
+            border-color: #b0c4de;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.08);
+        }
+
+        .search-form i {
+            color: #8a9aa9;
+            font-size: 1.1rem;
+            margin-left: 0.75rem;
+        }
+
+        .search-form input {
+            width: 100%;
+            padding: 0.75rem 0;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            color: #1e2b3c;
+        }
+
+        .search-form input::placeholder {
+            color: #9aabb9;
+            font-weight: 300;
+        }
+
+        .search-form button {
+            background: #1e2b3c;
+            border: none;
+            color: white;
+            padding: 0.65rem 1.4rem;
+            border-radius: 40px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-right: 0.2rem;
+        }
+
+        .search-form button:hover {
+            background: #e63946;
+        }
+
+        /* Filter buttons group */
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            flex: 0 1 auto;
+        }
+
+        .filter-group span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #5b6f82;
+            margin-left: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #dae0e9;
+            color: #3c4e5f;
+            padding: 0.45rem 1.1rem;
+            border-radius: 40px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+
+        .filter-btn i {
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .filter-btn:hover {
+            background: #f0f3f8;
+            border-color: #b0c4de;
+        }
+
+        .filter-btn.active {
+            background: #1e2b3c;
+            border-color: #1e2b3c;
+            color: white;
+            box-shadow: 0 4px 10px rgba(30, 43, 60, 0.15);
+        }
+
+        .filter-btn.active i {
+            opacity: 1;
+        }
+
+        /* Product grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Product card */
+        .product-card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02), 0 2px 8px rgba(0, 20, 30, 0.04);
+            transition: transform 0.2s, box-shadow 0.25s;
+            border: 1px solid #edf1f7;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 30px -12px rgba(30, 43, 60, 0.15), 0 8px 18px rgba(0, 0, 0, 0.03);
+            border-color: #d0dae8;
+        }
+
+        /* Product image area */
+        .product-image {
+            position: relative;
+            background: #0f1a26;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+            display: block;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.03);
+        }
+
+        /* Platform badge */
+        .platform-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            color: white;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 2;
+        }
+
+        /* Product info */
+        .product-info {
+            padding: 1.2rem 1rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0b1a2b;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.8em;
+        }
+
+        .product-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 0.6rem;
+            border-top: 1px solid #edf1f7;
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #1e2b3c;
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .price small {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: #7e8f9f;
+            margin-right: 0.15rem;
+        }
+
+        .old-price {
+            font-size: 0.75rem;
+            color: #9aabb9;
+            text-decoration: line-through;
+            margin-right: 0.3rem;
+            font-weight: 400;
+        }
+
+        .add-to-cart {
+            background: #eef2f6;
+            border: none;
+            color: #1e2b3c;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #dde3eb;
+        }
+
+        .add-to-cart i {
+            font-size: 1rem;
+        }
+
+        .add-to-cart:hover {
+            background: #e63946;
+            border-color: #e63946;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Empty state / notice (hidden by default, would be toggled by JS later) */
+        .no-products-message {
+            display: none; /* handled by JS later */
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 32px;
+            color: #5b6f82;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .toolbar {
+                border-radius: 28px;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-form {
+                flex: 1 1 auto;
+            }
+
+            .filter-group {
+                justify-content: center;
+            }
+
+            .filter-group span {
+                display: none; /* hide label on mobile for space */
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+
+            .product-title {
+                font-size: 0.9rem;
+            }
+
+            .price {
+                font-size: 0.95rem;
+            }
+
+            .add-to-cart {
+                width: 34px;
+                height: 34px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .product-info {
+                padding: 0.9rem 0.8rem;
+            }
+        }
+
+        /* Decorative hint for no-js */
+        .hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #8a9aa9;
+            margin-top: 2.5rem;
+            border-top: 1px solid #dae0e9;
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="shop-container">
+        <!-- Header -->
+        <header class="shop-header">
+            <h1>
+                <i class="fas fa-gamepad"></i>
+                گیم‌کی | کلید بازی
+            </h1>
+            <p>خرید آنی کلید اورجینال بازی‌های PC و کنسول</p>
+        </header>
+
+        <!-- Search & Filter toolbar (no JS, pure HTML/CSS) -->
+        <div class="toolbar">
+            <!-- Search form (GET method, JS disabled – handled by Django later) -->
+            <form class="search-form" action="#" method="get" onsubmit="return false;"> <!-- prevent actual submit for preview; Django handles later -->
+                <i class="fas fa-search"></i>
+                <input type="search" name="q" placeholder="جستجوی بازی... (مثلا: Elden Ring)" aria-label="جستجوی بازی">
+                <button type="submit" aria-label="جستجو">
+                    <i class="fas fa-arrow-left"></i>
+                    جستجو
+                </button>
+            </form>
+
+            <!-- Filter buttons (radio-like behavior using CSS only – just visual, no active state toggle via JS) 
+                 We use class="active" on one to show default state. -->
+            <div class="filter-group" aria-label="فیلتر بر اساس پلتفرم">
+                <span><i class="fas fa-sliders-h"></i> فیلتر:</span>
+                <button class="filter-btn active" type="button">
+                    <i class="fas fa-th-large"></i> همه
+                </button>
+                <button class="filter-btn" type="button">
+                    <i class="fab fa-windows"></i> PC
+                </button>
+                <button class="filter-btn" type="button">
+                    <i class="fab fa-playstation"></i> PS
+                </button>
+                <button class="filter-btn" type="button">
+                    <i class="fab fa-xbox"></i> Xbox
+                </button>
+                <button class="filter-btn" type="button">
+                    <i class="fas fa-gamepad"></i> Nintendo
+                </button>
+            </div>
+        </div>
+
+        <!-- Product grid -->
+        <div class="product-grid">
+
+            {% for product in products %}
+            <!-- Product 1 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="platform-badge">PC</span>
+
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="Elden Ring" loading="lazy">
+                    {% else %}
+                    <img src="" alt="Elden Ring" loading="lazy">
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">{{product.title}}</h3>
+                    <div class="product-meta">
+                        <div class="price">
+                            {{ product.price }} <small>تومان</small>
+                            <span class="old-price"></span>
+                        </div>
+                        <button class="add-to-cart" aria-label="افزودن به سبد خرید">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- Hint: No JS – Django handles filtering/search -->
+        <div class="hint">
+            <i class="fas fa-code"></i> این صفحه بدون جاوااسکریپت ساخته شده – جستجو و فیلتر توسط Django مدیریت می‌شود.
+        </div>
+    </div>
+</body>
+</html>
